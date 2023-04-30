@@ -4,14 +4,12 @@ class Bubble {
   const Bubble({
     required this.title,
     required this.titleStyle,
-    required this.iconColor,
     required this.bubbleColor,
-    required this.icon,
     required this.onPress,
+    this.prefixIcon,
   });
 
-  final IconData icon;
-  final Color iconColor;
+  final Widget? prefixIcon;
   final Color bubbleColor;
   final void Function() onPress;
   final String title;
@@ -38,13 +36,13 @@ class BubbleMenu extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Icon(
-            item.icon,
-            color: item.iconColor,
-          ),
-          const SizedBox(
-            width: 10.0,
-          ),
+          if (item.prefixIcon != null)
+            Row(children: <Widget>[
+              item.prefixIcon!,
+              const SizedBox(
+                width: 10.0,
+              ),
+            ]),
           Text(
             item.title,
             style: item.titleStyle,
